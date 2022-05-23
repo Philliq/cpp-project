@@ -1,20 +1,27 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <iostream>
+#include <sstream>
+
+using namespace std;
+
 
 char ringbuffer[512];
 int head = 0;
 int tail = 0;
-void rinbuffer_add(char zeichen){
+void ringbuffer_add(char zeichen){
     ringbuffer[head] = zeichen;
+    head += 1;
+    if(head>=512) head = 0;
+
 }
 
-int rinbuffer_get(char *zeichen){
-//    if(head == tail)
-//        return -1;
-//    else {
-//        *zeichen = ringbuffer[tail];
-//    }
-    return 0;
+char ringbuffer_get(){
+    char output = ringbuffer[tail];
+    tail++;
+
+    if(tail>=512) tail=0;
+    return output;
 }
 
 MainWindow::MainWindow(QWidget *parent)
@@ -43,5 +50,38 @@ void MainWindow::setOutputText(QString text){
      * und geben ssie diese im unteren textfeld aus.
      */
     //ui->textEdit_2->setText(text);
+
+//cout << text.toStdString() << endl;
+    bool nl = false;
+    stringstream output;
+
+    for(int i=0; i<text.count(); i++){
+        ringbuffer_add(text[i].toLatin1());
+        if(text[i] == '\n'){
+            nl = true;
+            //cout << "Ende der Zeile" << endl;
+
+        }
+    }
+
+    if(nl){
+        while(1){
+            char nc = ringbuffer_get();
+            output << nc;
+            if(nc == '\n'){
+                ui->textEdit_2->setText(QString::fromStdString(output.str()));
+                break;
+            }
+        }
+
+
+    }
+
+
+
+
+
+
+
 }
 
