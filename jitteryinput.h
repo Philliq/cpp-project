@@ -7,15 +7,15 @@
 class jitteryInput : public QObject
 {
     Q_OBJECT
-public:
-    explicit jitteryInput(QObject *parent = nullptr);
-    void start(int msec);
+    public:
+        explicit jitteryInput(QObject *parent = nullptr);
+        void start(int msec);
 
-private:
-    QTimer tim;
+    private:
+        QTimer tim;
 
-signals:
-    void newData(QString data);
+    signals:
+        void newData(QString data);
 
 };
 
