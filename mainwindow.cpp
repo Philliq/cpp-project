@@ -19,7 +19,6 @@ void ringbuffer_add(char zeichen){
 char ringbuffer_get(){
     char output = ringbuffer[tail];
     tail++;
-
     if(tail>=512) tail=0;
     return output;
 }
@@ -49,7 +48,6 @@ void MainWindow::setOutputText(QString text){
      * gefunden haben, entnehmen sie alle zeichen inklusive dem umbruch
      * und geben ssie diese im unteren textfeld aus.
      */
-    //ui->textEdit_2->setText(text);
 
 //cout << text.toStdString() << endl;
     bool nl = false;
@@ -59,7 +57,7 @@ void MainWindow::setOutputText(QString text){
         ringbuffer_add(text[i].toLatin1());
         if(text[i] == '\n'){
             nl = true;
-            //cout << "Ende der Zeile" << endl;
+//cout << "Ende der Zeile" << endl;
 
         }
     }

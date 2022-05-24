@@ -12,16 +12,16 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    public:
+        MainWindow(QWidget *parent = nullptr);
+        ~MainWindow();
 
-private:
-    Ui::MainWindow *ui;
+    private:
+        Ui::MainWindow *ui;
 
-public slots:
-    void setInputText(QString text);
-    void setOutputText(QString text);
+    public slots:
+        void setInputText(QString text);
+        void setOutputText(QString text);
 
 };
 #endif // MAINWINDOW_H
