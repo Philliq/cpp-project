@@ -12,7 +12,7 @@ int main(int argc, char *argv[]){
 
     w.show();
 
-    input.start(1000);
+    input.start(10);
 
     return a.exec();
 }
