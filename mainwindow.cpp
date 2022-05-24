@@ -40,16 +40,6 @@ void MainWindow::setInputText(QString text){
 }
 
 void MainWindow::setOutputText(QString text){
-    /*
-     * Aufgabe: Nehmen Sie bitte den Input (text) engegen und
-     * speichern Sie alle einzelnen Zeichen in einem Ringpuffer ab.
-     * anschließend gehen Sien den Rinpuffer von Beginn an durch und
-     * suchen sie nach einem Zeilenumbruch. Wenn Sie den Zeilenumbruch
-     * gefunden haben, entnehmen sie alle zeichen inklusive dem umbruch
-     * und geben ssie diese im unteren textfeld aus.
-     */
-
-//cout << text.toStdString() << endl;
     bool nl = false;
     stringstream output;
 
@@ -57,7 +47,6 @@ void MainWindow::setOutputText(QString text){
         ringbuffer_add(text[i].toLatin1());
         if(text[i] == '\n'){
             nl = true;
-//cout << "Ende der Zeile" << endl;
 
         }
     }
