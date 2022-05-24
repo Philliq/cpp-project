@@ -49,7 +49,7 @@ void MainWindow::setOutputText(QString text){
      * und geben ssie diese im unteren textfeld aus.
      */
 
-//cout << text.toStdString() << endl;
+cout << text.toStdString() << endl;
     bool nl = false;
     stringstream output;
 
@@ -57,10 +57,16 @@ void MainWindow::setOutputText(QString text){
         ringbuffer_add(text[i].toLatin1());
         if(text[i] == '\n'){
             nl = true;
-//cout << "Ende der Zeile" << endl;
+cout << "Ende der Zeile" << endl;
 
         }
     }
+/// Debug-Schleife zur Ausgabe des gesamten Ringpuffers
+for(int j=0; j<512; j++){
+    if(ringbuffer[j] == '\r' || ringbuffer[j] == '\n') continue;
+    cout << ringbuffer[j];
+}
+cout << endl;
 
     if(nl){
         while(1){
