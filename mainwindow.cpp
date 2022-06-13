@@ -9,13 +9,21 @@ using namespace std;
 char ringbuffer[512];
 int head = 0;
 int tail = 0;
+int globCounter = 0;
+
+/** Fügt ein Zeichen in den Ringpuffer ein
+ *  @param[in] zeichen Ein einzelnes Zeichen
+ */
 void ringbuffer_add(char zeichen){
     ringbuffer[head] = zeichen;
     head += 1;
     if(head>=512) head = 0;
-
 }
 
+
+/** Holt ein Zeichen aus dem Ringpuffer
+ *  @return Das aktuelle Zeichen am Tail des Ringpuffers
+ */
 char ringbuffer_get(){
     char output = ringbuffer[tail];
     tail++;
@@ -47,7 +55,7 @@ void MainWindow::setOutputText(QString text){
         ringbuffer_add(text[i].toLatin1());
         if(text[i] == '\n'){
             nl = true;
-
+            globCounter ++;
         }
     }
 
@@ -56,12 +64,10 @@ void MainWindow::setOutputText(QString text){
             char nc = ringbuffer_get();
             output << nc;
             if(nc == '\n'){
-                ui->textEdit_2->setText(QString::fromStdString(output.str()));
+                ui->textEdit_2->setText(QString("Zaehlerstand: ") + QString::fromStdString(to_string(globCounter)) + QString("\n") + QString::fromStdString(output.str()));
                 break;
             }
         }
-
-
     }
 
 
